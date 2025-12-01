@@ -1,34 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; padding: 30px; }
+        .container {
+            width: 450px; margin: auto; padding: 25px;
+            background: white; border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        a.logout-btn {
+            padding: 10px 20px; background: red;
+            color: white; text-decoration: none;
+            border-radius: 5px; display: inline-block;
+            margin-top: 20px;
+        }
+        a.logout-btn:hover { background: darkred; }
+    </style>
 </head>
+<body>
 
-<body class="bg-gray-50">
+<div class="container">
+    <h2>Welcome, {{ user.username }} 👋</h2>
+    <p>You are logged in. This is your dashboard.</p>
 
-    <nav class="bg-indigo-600 text-white px-6 py-4 flex justify-between items-center">
-        <h1 class="text-xl font-semibold">Dashboard</h1>
-
-        <a href="{% url 'logout' %}"
-           class="bg-white text-indigo-600 px-4 py-1 rounded-md hover:bg-gray-100 transition">
-            Logout
-        </a>
-    </nav>
-
-    <div class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold mb-4">Welcome, {{ user_name }} 👋</h2>
-
-        <p class="text-gray-700">
-            You are logged in using **session tokens**.
-        </p>
-
-        <div class="mt-6 p-4 bg-gray-100 rounded-md">
-            <p class="text-gray-600 text-sm">User Email: {{ user_email }}</p>
-            <p class="text-gray-600 text-sm mt-1">Session Token: {{ request.session.session_token }}</p>
-        </div>
-    </div>
+    <a href="/logout/" class="logout-btn">Logout</a>
+</div>
 
 </body>
 </html>

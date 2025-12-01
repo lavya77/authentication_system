@@ -1,42 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
     <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: Arial; background: #f4f4f4; padding: 30px; }
+        .container {
+            width: 350px; margin: auto; padding: 25px;
+            background: white; border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            width: 100%; padding: 10px;
+            margin: 10px 0; border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px; width: 100%;
+            background: #2196F3; color: white;
+            border: none; border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover { background: #0b7dda; }
+        .error { color: red; }
+    </style>
 </head>
+<body>
 
-<body class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="container">
+    <h2>Login</h2>
 
-    <div class="w-full max-w-sm bg-white p-6 rounded-lg shadow-md">
-        <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
 
-        <form method="POST">
-            {% csrf_token %}
+    <form method="POST">
+        {% csrf_token %}
+        <input name="username" placeholder="Username" required>
+        <input name="password" type="password" placeholder="Password" required>
 
-            <div class="mb-4">
-                <label class="block text-gray-700 font-medium">Email</label>
-                <input type="email" name="email"
-                       class="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-indigo-300">
-            </div>
+        <button type="submit">Login</button>
+    </form>
 
-            <div class="mb-4">
-                <label class="block text-gray-700 font-medium">Password</label>
-                <input type="password" name="password"
-                       class="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-indigo-300">
-            </div>
-
-            <button type="submit"
-                    class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition">
-                Login
-            </button>
-        </form>
-
-        <p class="text-center mt-4 text-sm">
-            Don’t have an account?
-            <a href="{% url 'signup' %}" class="text-indigo-600">Sign up</a>
-        </p>
-    </div>
+    <p>Don't have an account? <a href="/signup/">Signup</a></p>
+</div>
 
 </body>
 </html>
